@@ -1,0 +1,56 @@
+
+
+#define do1 261
+#define re1 294
+#define me1 329
+#define fa1 349
+#define so1 392
+#define la1 440
+#define si1 493
+
+#define do2 523
+#define re2 587
+#define me2 659
+#define fa2 698
+#define so2 784
+#define la2 880
+#define si2 988
+
+#define do3 1046
+#define re3 1175
+int tune[] = {do1,re1,me1,fa1,so1,la1,si1,do2,re2,me2,fa2,so2,la2,si2,do3,re3};
+#include<Keypad.h>
+const byte ROWS = 4; // 4 Rows
+const byte COLS = 4; // 4 Columns // 定義 Keypad 的按鍵
+
+char keys[ROWS][COLS] = {
+{'F', 'B', '7', '3'}, 
+{'E','A','6','2'},
+{'D', '9', '5', '1'}, 
+{'C', '8', '4', '0'} }; // 定義 Keypad 連到 Arduino 的接腳
+byte rowPins[ROWS] = {13, 12, 11, 10}; // 連到 Keypad 的 4 個 Rows
+byte colPins[COLS] = {9, 8, 7, 6}; // 連到 Keypad 的 4 個 Columns
+// 建立 Keypad 物件
+Keypad keypad = Keypad(makeKeymap(keys), rowPins,colPins,ROWS, COLS );
+void setup(){
+Serial.begin(9600);
+}
+void loop(){
+char key = keypad.getKey(); // 讀取 Keypad
+  if(key != NO_KEY){
+    if(key>='A'&&key<='F')
+    {
+      Serial.println(key);
+      tone(5, tune[key-'A'+10]);
+      delay(100);
+      noTone(5);
+    }
+    else
+    {
+      Serial.println(key);
+      tone(5, tune[key-'0']);
+      delay(100);
+      noTone(5); 
+  }
+  }
+}
