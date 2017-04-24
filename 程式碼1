@@ -1,0 +1,49 @@
+
+#define do1 261
+#define re1 294
+#define me1 329
+#define fa1 349
+#define so1 392
+#define la1 440
+#define si1 493
+#define do2 523
+#define re2 587
+#define me2 659
+
+
+
+
+int tune[] = {so1,la1,si1,so1,
+so1,la1,si1,so1,0,
+si1,do2,re2,0,
+si1,do2,re2,0,
+re2,me2,re2,do2,si1,so1,0,
+re2,me2,re2,do2,si1,so1,0,
+so1,re1,so1,
+so1,re1,so1};
+
+float duration[] = {0.25,0.25,0.25,0.25,
+0.25,0.25,0.25,0.25,0.03,
+0.25,0.25,0.5,0.03,
+0.25,0.25,0.5,0.03,
+0.25,0.25,0.25,0.25,0.25,0.25,
+0.25,0.25,0.25,0.25,0.25,0.25,
+0.25,0.25,0.5,0.01,
+0.25,0.25,0.5,0.01};
+int length;
+void setup() {
+pinMode(5, OUTPUT);
+length = sizeof(tune) /sizeof(tune[0]);
+
+}
+
+void loop() {
+  for (int x=0; x<length; x++) 
+  {
+    tone(5, tune[x]);
+    delay(2000 *duration[x]);
+    noTone(5);
+  }
+  delay(5000);
+
+} 
